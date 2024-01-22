@@ -18,25 +18,23 @@
     Отмена HTTP запроса. В случаях, когда необходимо отменить запрос используется интерфейс AbortController. Для того, чтобы была возможность отменить fetch в его options передают AbortSignal.
     После этого, если будет вызван метод abort(), запрос будет отменен.
 
-    Переменные, созданные через let или const, до того момента в коде, где они объявлены при обращении вызовут ошибку ReferenceError, так как находятся в TDZ (временной мертвой зоне).
+    Переменные, созданные через let или const, до того момента в коде, где они объявлены, при обращении вызовут ошибку ReferenceError, так как находятся в TDZ (временной мертвой зоне).
 
 
     const a = Symbol('x') // Symbol
     var b = 15n // BigInt
-    let c = Number('25') // Number
+    var u = BigInt(9997000254999999) // BigInt
+    let c = 0o77 // Number
     const d = parseInt('25xxx25') // Number
-    var e = 25 // Number
+    var e = 0b11 // Number
     let f = 2 > 0 // Boolean
     const g = true // Boolean
-    var h = true // Boolean
+    var h = Boolean(0) // Boolean
     let i  // Undefined
     const j = undefined // Undefined
-    var k = undefined // Undefined
     let l = null // Null
-    const m = null // Null
-    var n = null // Null
     let o = toString(15) // String
-    const p = [1,5].join('') // String
+    const p = [1,5].join("") // String
     var q = '15' // String
 
 
