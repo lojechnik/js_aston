@@ -1,25 +1,66 @@
-// Массивы
+// Какие бывают методы сортировки?
 
-// Массивы  в js сочетают в себе поведение хеш таблиц и связанных списков. В отличии от ключей хеш-таблиц индексы обязательно упорядочены и не могут быть наложены.
-// Как и связанные списки массивы расширяемы. Также по индексу можно удалять или добавлять элемент.
-
-// bind Полифил
-
-Function.proptotype.bind = function (context) {
-  const func = this;
-  return function (...args) {
-    return func.apply(context, args);
-  };
-};
-
-// Привязка контекста
-
-function logger() {
-  console.log(`I output only external context: ${this.item}`);
+//
+// Циклическая, пузырьком, выбором, быстрая. Видов сортировки очень много, на практике используются не все.
+//
+const Person  = {
+  firstName : '',
+  logInfo : function  () {
+    console.log('123')
+  }
 }
 
-const obj = { item: "some value" };
-const loggerBound = logger.bind(obj);
-loggerBound();
-logger.apply({ item: "some value" });
-logger.call({ item: "some value" });
+
+function Person1(name){
+  this.firstName = name;
+}
+
+const Matthew = new Person1('123')
+const Andrew = Object.create(Person1)
+
+Object.prototype.logInfo = function(){
+  console.log('123')
+}
+window.logInfo()
+
+class PersonThree extends Person1 {
+  surName = 'potato'
+  get surName() {
+      return this.surName + 'getter applied'
+  }
+  set surName(value) {
+    this.surName = value.split(' ')
+  }
+}
+
+// Алгоритм,  если массив отсортирован
+// Сложность O(n)
+
+const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+const total = 13;
+let resultingArray = []
+resultingArray.push(arr[arr.length-1])
+loop1: for (const el of arr) {
+  
+if (el === total - resultingArray[0]) {
+console.log('fitting el',el)
+  resultingArray.push(el)
+  break loop1;
+}
+
+}
+console.log('res', resultingArray)
+
+//Если не отсортирован, сложность O(n^2)
+
+let resultingArray1 = []
+
+loop1: for (const el of arr) {
+  for (const elem of arr) {
+  if (el+elem === 13) {
+  resultingArray1.push(el)
+    resultingArray1.push(elem)
+    break loop1;
+    }
+  }
+}
