@@ -23,7 +23,7 @@ Object.prototype.logInfo = function(){
 }
 window.logInfo()
 
-class PersonThree extends Person1 {
+class PersonThree {
   surName = 'potato'
   get surName() {
       return this.surName + 'getter applied'
@@ -32,6 +32,7 @@ class PersonThree extends Person1 {
     this.surName = value.split(' ')
   }
 }
+Object.setPrototypeOf(PersonThree, Person1)
 
 // Алгоритм,  если массив отсортирован
 // Сложность O(n)
