@@ -1,67 +1,52 @@
-// Какие бывают методы сортировки?
+let promiseTwo = new Promise((resolve, reject) => {
+  resolve("a");
+});
 
-//
-// Циклическая, пузырьком, выбором, быстрая. Видов сортировки очень много, на практике используются не все.
-//
-const Person  = {
-  firstName : '',
-  logInfo : function  () {
-    console.log('123')
-  }
+promiseTwo
+.then((res) => {
+   return res + "b";
+})
+.then((res) => {
+   return res + "с";
+})
+.finally((res) => {
+   return res + "!!!!!!!";
+})
+.catch((res) => {
+   return res + "d";
+})
+.then((res) => {
+   console.log(res);
+});
+
+// Выполнится только цепочка then'оd т.к. промис резолвится при инициализации, а в finally не сайд эффект.
+
+function doSmth() {
+  return Promise.resolve("123");
 }
 
+doSmth()
+.then(function (a) {
+  console.log("1", a); //
+  return a;
+})
+.then(function (b) {
+  console.log("2", b);
+  return Promise.reject("321");
+})
+.catch(function (err) {
+  console.log("3", err);
+})
+.then(function (c) {
+  console.log("4", c);
+return c;
+});
 
-function Person1(name){
-  this.firstName = name;
+// В последнем консоль логе будет 4 undefined т.к. catch ничего не возвращает
+
+const timedOutArray = (array) => {
+  array.forEach((el,i) => {
+    setTimeout(() => {console.log(el)},3000 * i)
+  })
 }
 
-const Matthew = new Person1('123')
-const Andrew = Object.create(Person1)
-
-Object.prototype.logInfo = function(){
-  console.log('123')
-}
-window.logInfo()
-
-class PersonThree {
-  surName = 'potato'
-  get surName() {
-      return this.surName + 'getter applied'
-  }
-  set surName(value) {
-    this.surName = value.split(' ')
-  }
-}
-Object.setPrototypeOf(PersonThree, Person1)
-
-// Алгоритм,  если массив отсортирован
-// Сложность O(n)
-
-const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-const total = 13;
-let resultingArray = []
-resultingArray.push(arr[arr.length-1])
-loop1: for (const el of arr) {
-  
-if (el === total - resultingArray[0]) {
-console.log('fitting el',el)
-  resultingArray.push(el)
-  break loop1;
-}
-
-}
-console.log('res', resultingArray)
-
-//Если не отсортирован, сложность O(n^2)
-
-let resultingArray1 = []
-
-loop1: for (const el of arr) {
-  for (const elem of arr) {
-  if (el+elem === 13) {
-  resultingArray1.push(el)
-    resultingArray1.push(elem)
-    break loop1;
-    }
-  }
-}
