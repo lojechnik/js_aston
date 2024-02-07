@@ -5,7 +5,7 @@ localstorage cookie session storage
 
 /localstoarge бессрочной хранение, чистится только очисткой кеша или жсом. 
 
-localstorage до 5мб информации cookie 
+localstorage до 5мб информации 
 
 session storage хранится, пока открыт браузер уникальные данные на каждой вкладке
 
